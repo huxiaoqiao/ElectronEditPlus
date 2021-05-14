@@ -1,1 +1,1 @@
-"Electron开发的简易版EditPlus" 
+## Electron寮�鍙戠殑绠�鏄撶増EditPlus
