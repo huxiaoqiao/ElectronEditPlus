@@ -16,13 +16,15 @@ const template = [
             {
                 label: '打开',
                 click: () => {
-
+                    //通知渲染进程弹出打开文件弹框
+                    BrowserWindow.getFocusedWindow().webContents.send('action', 'open');
                 }
             },
             {
                 label: '保存',
                 click: () => {
-
+                    //通知渲染进程弹出保存文件弹框
+                    BrowserWindow.getFocusedWindow().webContents.send('action', 'save');
                 }
             },
             {
@@ -99,6 +101,19 @@ const template = [
             {
                 label: '全屏',
                 role: 'togglefullscreen'
+            },
+            {
+                type: 'separator'
+            },
+            {
+                label: '重载(reload)',//!用于调试,打包前去掉
+                role: 'reload'
+            },
+            {
+                label: '调试窗口',//!用于调试,打包前去掉
+                click: () => {
+                    BrowserWindow.getFocusedWindow().webContents.openDevTools();
+                }
             }
         ]
     },
@@ -157,4 +172,4 @@ const contextMenu = Menu.buildFromTemplate(contextMenuTemplate);
 
 ipcMain.on('contextMenu', () => {
     contextMenu.popup(BrowserWindow.getFocusedWindow());
-})
+});

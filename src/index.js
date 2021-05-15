@@ -12,8 +12,9 @@ const createWindow = () => {
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false
+      nodeIntegration: true,//允许使用node模块
+      contextIsolation: false,
+      enableRemoteModule:true//允许渲染进程使用remote模块
     }
   });
 
