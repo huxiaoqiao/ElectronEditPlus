@@ -9,12 +9,15 @@ const template = [
         submenu: [
             {
                 label: '新建',
+                accelerator: 'Ctrl+N',
                 click: () => {
-
+                    //通知渲染进程新建文件
+                    BrowserWindow.getFocusedWindow().webContents.send('action', 'new');
                 }
             },
             {
                 label: '打开',
+                accelerator: 'Ctrl+O',
                 click: () => {
                     //通知渲染进程弹出打开文件弹框
                     BrowserWindow.getFocusedWindow().webContents.send('action', 'open');
@@ -22,6 +25,7 @@ const template = [
             },
             {
                 label: '保存',
+                accelerator: 'Ctrl+S',
                 click: () => {
                     //通知渲染进程弹出保存文件弹框
                     BrowserWindow.getFocusedWindow().webContents.send('action', 'save');
@@ -32,14 +36,19 @@ const template = [
             },
             {
                 label: '打印',
+                accelerator: 'Ctrl+P',
                 click: () => {
-
+                    //https://www.electronjs.org/docs/api/web-contents#webcontents
+                    BrowserWindow.getFocusedWindow().webContents.print();
                 }
             },
             {
                 label: '退出',
+                accelerator: 'Ctrl+Q',
                 click: () => {
-
+                    //如果没有保存文件，需要询问是否保存文件再退出
+                    //主进程通知渲染进程
+                    BrowserWindow.getFocusedWindow().webContents.send('action', 'exit');
                 }
             }
         ]
